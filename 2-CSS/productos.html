@@ -9,7 +9,60 @@
 </head>
 <body>
 
-<h1>Catálogo de Productos</h1>
+<header>
+    <h1>Catálogo de Productos</h1>
+</header>
+
+<aside class="filtros">
+    <form>
+        <fieldset>
+            <legend>Búsqueda</legend>
+            <p>
+                <label for="buscar">Buscar:</label>
+                <input id="buscar" type="text" name="txt_buscar">
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Precios</legend>
+            <p>
+                <label for="precioMin">Mínimo:</label>
+                <input id="precioMin" type="number" name="num_precio_min">
+            </p>
+            <p>
+                <label for="precioMax">Máximo:</label>
+                <input id="precioMax" type="number" name="num_precio_max">
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Tipo de Productos</legend>
+            <p>
+                <input id="protectores" type="checkbox" name="chk_categoria" value="Protectores">
+                <label for="protectores">Protectores</label>
+            </p>
+            <p>
+                <input id="entrenamiento" type="checkbox" name="chk_categoria" value="Entrenamiento">
+                <label for="entrenamiento">Entrenamiento</label>
+            </p>
+            <p>
+                <input id="doboks" type="checkbox" name="chk_categoria" value="Dobok">
+                <label for="doboks">Doboks</label>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Marca</legend>
+            <p>
+                <select id="marca" name="sel_marca">
+                    <option value="">Todas</option>
+                    <option value="Gran Marc">Gran Marc</option>
+                    <option value="Daedo">Daedo</option>
+                </select>
+            </p>
+        </fieldset>
+    </form>
+</aside>
 
 <main class="contenedor">
 
