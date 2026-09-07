@@ -67,3 +67,44 @@ h1 {
     border: 1px solid #aab7b8;
     border-radius: 4px;
 }
+/* Variables de colores reutilizables */
+:root {
+    --color-catalogo: #8b0000;
+    --color-catalogo-hover: #b22222;
+    --color-carrito: #2a1fa8;
+    --color-carrito-hover: #4636d9;
+    --color-texto-boton: #ffffff;
+}
+
+nav {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.btn {
+    color: var(--color-texto-boton);
+    border: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    /* La transición suaviza el cambio de fondo y de padding */
+    transition: background-color 0.4s ease, padding 0.4s ease;
+}
+
+.btn-catalogo {
+    background-color: var(--color-catalogo);
+}
+
+.btn-catalogo:hover {
+    background-color: var(--color-catalogo-hover);
+    padding: 15px 30px;
+}
+
+.btn-carrito {
+    background-color: var(--color-carrito);
+}
+
+.btn-carrito:hover {
+    background-color: var(--color-carrito-hover);
+    padding: 15px 30px;
+}
