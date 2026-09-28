@@ -1,10 +1,12 @@
 /**
- * Convierte el valor ingresado en un campo a las demás unidades de longitud
- * y actualiza los inputs de la página.
+ * Convierte el valor ingresado en uno de los campos del formulario a las
+ * demás unidades de longitud (metro, pulgada, pie y yarda) y actualiza
+ * todos los inputs de la página con el resultado.
+ *
  * @method convertir
- * @param valor Número ingresado por el usuario en el campo
- * @param campo Id del campo que fue modificado (metro, pulgada, pie o yarda)
- * @return No retorna valor
+ * @param {string} valor - Número ingresado por el usuario en el campo modificado.
+ * @param {string} campo - Id del campo modificado: "metro", "pulgada", "pie" o "yarda".
+ * @return {void} No retorna ningún valor; asigna los resultados a los inputs.
  */
 function convertir(valor, campo) {
     var numero = Number(valor);
