@@ -29,3 +29,29 @@ function convertir(valor, campo) {
     document.getElementById("pie").value = metros * 3.28084;
     document.getElementById("yarda").value = metros * 1.09361;
 }
+
+/**
+ * Convierte entre grados y radianes según el campo que haya modificado
+ * el usuario, y actualiza ambos inputs de la página.
+ *
+ * @method convertirAngulo
+ * @param {string} valor - Número ingresado por el usuario en el campo modificado.
+ * @param {string} campo - Id del campo modificado: "grados" o "radianes".
+ * @return {void} No retorna ningún valor; asigna los resultados a los inputs.
+ */
+function convertirAngulo(valor, campo) {
+    var numero = Number(valor);
+    var grados;
+    var radianes;
+
+    if (campo == "grados") {
+        grados = numero;
+        radianes = numero * Math.PI / 180;
+    } else if (campo == "radianes") {
+        radianes = numero;
+        grados = numero * 180 / Math.PI;
+    }
+
+    document.getElementById("grados").value = grados;
+    document.getElementById("radianes").value = radianes;
+}
