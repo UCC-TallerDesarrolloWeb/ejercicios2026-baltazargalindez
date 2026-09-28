@@ -93,3 +93,25 @@ mostrarOcultar = (valor) => {
         miDiv.style.display = "none";
     }
 }
+
+/**
+ * Abre el dialog con el detalle del producto.
+ *
+ * @method abrirDialog
+ * @return {void} No retorna ningún valor; muestra el dialog en pantalla.
+ */
+abrirDialog = () => {
+    let miDialog = document.getElementById("dialogDetalle");
+    miDialog.showModal();
+}
+
+/**
+ * Cierra el dialog con el detalle del producto.
+ *
+ * @method cerrarDialog
+ * @return {void} No retorna ningún valor; oculta el dialog.
+ */
+cerrarDialog = () => {
+    let miDialog = document.getElementById("dialogDetalle");
+    miDialog.close();
+}
