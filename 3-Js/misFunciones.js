@@ -1,33 +1,53 @@
 /**
- * Convierte el valor ingresado en uno de los campos del formulario a las
- * demás unidades de longitud (metro, pulgada, pie y yarda) y actualiza
- * todos los inputs de la página con el resultado.
+ * Convierte el valor ingresado en uno de los campos a las demás unidades
+ * de longitud (metro, pulgada, pie y yarda) y actualiza los inputs.
  *
- * @method convertir
- * @param {string} valor - Número ingresado por el usuario en el campo modificado.
- * @param {string} campo - Id del campo modificado: "metro", "pulgada", "pie" o "yarda".
+ * @method convertirUnidades
+ * @param {string} id - Id del campo modificado: "metro", "pulgada", "pie" o "yarda".
+ * @param {string} valor - Número ingresado por el usuario en ese campo.
  * @return {void} No retorna ningún valor; asigna los resultados a los inputs.
  */
-function convertir(valor, campo) {
-    var numero = Number(valor);
-    var metros;
+convertirUnidades = (id, valor) => {
+    
+    let met, pul, pie, yar;
 
-    // Primero se lleva el valor ingresado a metros
-    if (campo == "metro") {
-        metros = numero;
-    } else if (campo == "pulgada") {
-        metros = numero / 39.3701;
-    } else if (campo == "pie") {
-        metros = numero / 3.28084;
-    } else if (campo == "yarda") {
-        metros = numero / 1.09361;
+    if (valor.includes(",")) {
+        valor = valor.replace(",", ".");
     }
 
-    // Luego se convierten los metros a todas las unidades
-    document.getElementById("metro").value = metros;
-    document.getElementById("pulgada").value = metros * 39.3701;
-    document.getElementById("pie").value = metros * 3.28084;
-    document.getElementById("yarda").value = metros * 1.09361;
+    if (isNaN(valor)) {
+        alert("El valor ingresado es incorrecto");
+        met = "";
+        pul = "";
+        pie = "";
+        yar = "";
+    } else if (id === "metro") {
+        met = valor;
+        pul = valor * 39.3701;
+        pie = valor * 3.28084;
+        yar = valor * 1.09361;
+    } else if (id === "pulgada") {
+        met = valor / 39.3701;
+        pul = valor;
+        pie = valor / 12;
+        yar = valor / 36;
+    } else if (id === "pie") {
+        met = valor / 3.28084;
+        pul = valor * 12;
+        pie = valor;
+        yar = valor / 3;
+    } else if (id === "yarda") {
+        met = valor / 1.09361;
+        pul = valor * 36;
+        pie = valor * 3;
+        yar = valor;
+    }
+
+    
+    document.getElementById("metro").value = met;
+    document.getElementById("pulgada").value = pul;
+    document.getElementById("pie").value = pie;
+    document.getElementById("yarda").value = yar;
 }
 
 /**
