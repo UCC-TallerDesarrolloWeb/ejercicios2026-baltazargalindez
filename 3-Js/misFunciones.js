@@ -75,3 +75,21 @@ function convertirAngulo(valor, campo) {
     document.getElementById("grados").value = grados;
     document.getElementById("radianes").value = radianes;
 }
+
+/**
+ * Muestra u oculta el div de información según el radio button seleccionado,
+ * modificando su propiedad display.
+ *
+ * @method mostrarOcultar
+ * @param {string} valor - Value del radio seleccionado: "val_mostrar" o "val_ocultar".
+ * @return {void} No retorna ningún valor; cambia el estilo del div.
+ */
+mostrarOcultar = (valor) => {
+    let miDiv = document.getElementById("unDiv");
+
+    if (valor === "val_mostrar") {
+        miDiv.style.display = "block";
+    } else {
+        miDiv.style.display = "none";
+    }
+}
