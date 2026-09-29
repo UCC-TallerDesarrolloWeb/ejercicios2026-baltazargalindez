@@ -212,3 +212,64 @@ cerrarDialog = () => {
     let miDialog = document.getElementById("dialogDetalle");
     miDialog.close();
 }
+/**
+ * Devuelve el array de productos guardado en el localStorage.
+ * Si todavía no existe, devuelve un array vacío.
+ *
+ * @method obtenerCarrito
+ * @return {Array} Array de productos que hay en el carrito.
+ */
+obtenerCarrito = () => {
+    let guardado = localStorage.getItem("carrito");
+
+    if (guardado === null) {
+        return [];
+    }
+
+    return JSON.parse(guardado);
+}
+
+/**
+ * Agrega el producto seleccionado al carrito y lo guarda en el localStorage.
+ *
+ * @method agregarAlCarrito
+ * @param {number} indice - Posición del producto dentro del array productos.
+ * @return {void} No retorna ningún valor; actualiza el localStorage.
+ */
+agregarAlCarrito = (indice) => {
+    let carrito = obtenerCarrito();
+
+    carrito.push(productos[indice]);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    alert(productos[indice].nombre + " se agregó al carrito");
+}
+
+/**
+ * Recorre el carrito guardado en el localStorage y crea una tarjeta
+ * por cada producto dentro del contenedor de la página carrito.html.
+ *
+ * @method renderizarCarrito
+ * @return {void} No retorna ningún valor; escribe las tarjetas en el DOM.
+ */
+renderizarCarrito = () => {
+    let contenedor = document.getElementById("contenedorCarrito");
+    let carrito = obtenerCarrito();
+    let tarjetas = "";
+
+    if (carrito.length === 0) {
+        contenedor.innerHTML = "<p>El carrito está vacío.</p>";
+        return;
+    }
+
+    for (let i = 0; i < carrito.length; i++) {
+        tarjetas = tarjetas +
+            '<div class="tarjeta">' +
+                '<img src="' + RUTA_IMAGENES + carrito[i].imagen + '" alt="' + carrito[i].nombre + '">' +
+                '<h3>' + carrito[i].nombre + '</h3>' +
+                '<p class="precio">$' + carrito[i].precio + '</p>' +
+            '</div>';
+    }
+
+    contenedor.innerHTML = tarjetas;
+}
