@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Carrito de Compras</title>
+
+    <link rel="stylesheet" href="estilos.css">
+    <script type="text/javascript" src="tienda.js"></script>
+    <script type="text/javascript" src="misFunciones.js"></script>
+</head>
+<body onload="renderizarCarrito(); actualizarContador()">
+
+<header>
+    <h1>Catálogo de Productos</h1>
+</header>
+
+<nav>
+    <button class="btn btn-catalogo" onclick="location.href='productos.html'">Catálogo</button>
+    <button class="btn btn-carrito" onclick="location.href='carrito.html'">Carrito de Compras</button>
+    <span class="contador" id="contadorCarrito">0</span>
+</nav>
+
+<section class="acciones">
+    <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar el Carrito</button>
+    <p class="total" id="totalCarrito"></p>
+</section>
+
+<main class="contenedor" id="contenedorCarrito">
+</main>
+
+<footer>
+    <p>Taller de Desarrollo Web &copy; 2026 - Baltazar Galindez</p>
+</footer>
+
+</body>
+</html>

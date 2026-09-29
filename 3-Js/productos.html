@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Productos</title>
+
+    <link rel="stylesheet" href="estilos.css">
+    <script type="text/javascript" src="tienda.js"></script>
+    <script type="text/javascript" src="misFunciones.js"></script>
+</head>
+<body onload="renderizarProductos(); actualizarContador()">
+
+<header>
+    <h1>Catálogo de Productos</h1>
+</header>
+
+<nav>
+    <button class="btn btn-catalogo" onclick="location.href='productos.html'">Catálogo</button>
+    <button class="btn btn-carrito" onclick="location.href='carrito.html'">Carrito de Compras</button>
+    <span class="contador" id="contadorCarrito">0</span>
+</nav>
+
+<aside class="filtros">
+    <form>
+        <fieldset>
+            <legend>Búsqueda</legend>
+            <p>
+                <label for="buscar">Buscar:</label>
+                <input id="buscar" type="text" name="txt_buscar" oninput="aplicarFiltros()">
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Precios</legend>
+            <p>
+                <label for="precioMin">Mínimo:</label>
+                <input id="precioMin" type="number" name="num_precio_min" oninput="aplicarFiltros()">
+            </p>
+            <p>
+                <label for="precioMax">Máximo:</label>
+                <input id="precioMax" type="number" name="num_precio_max" oninput="aplicarFiltros()">
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Tipo de Productos</legend>
+            <p>
+                <input id="protectores" type="checkbox" name="chk_categoria" value="Protectores" onchange="aplicarFiltros()">
+                <label for="protectores">Protectores</label>
+            </p>
+            <p>
+                <input id="entrenamiento" type="checkbox" name="chk_categoria" value="Entrenamiento" onchange="aplicarFiltros()">
+                <label for="entrenamiento">Entrenamiento</label>
+            </p>
+            <p>
+                <input id="doboks" type="checkbox" name="chk_categoria" value="Dobok" onchange="aplicarFiltros()">
+                <label for="doboks">Doboks</label>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Marca</legend>
+            <p>
+                <select id="marca" name="sel_marca" onchange="aplicarFiltros()">
+                    <option value="">Todas</option>
+                    <option value="Gran Marc">Gran Marc</option>
+                    <option value="Daedo">Daedo</option>
+                </select>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Ordenar por</legend>
+            <p>
+                <select id="orden" name="sel_orden" onchange="aplicarFiltros()">
+                    <option value="">Sin ordenar</option>
+                    <option value="precioAsc">Precio: menor a mayor</option>
+                    <option value="precioDesc">Precio: mayor a menor</option>
+                    <option value="nombreAsc">Nombre: A-Z</option>
+                    <option value="nombreDesc">Nombre: Z-A</option>
+                </select>
+            </p>
+        </fieldset>
+    </form>
+</aside>
+
+<main class="contenedor" id="contenedorProductos">
+</main>
+
+<dialog id="dialogDetalle">
+    <div id="contenidoDialog"></div>
+    <button onclick="cerrarDialog()">Cerrar</button>
+</dialog>
+
+<footer>
+    <p>Taller de Desarrollo Web &copy; 2026 - Baltazar Galindez</p>
+</footer>
+
+</body>
+</html>
