@@ -155,27 +155,76 @@ dividir = () => {
 const RUTA_IMAGENES = "https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/";
 
 /**
- * Recorre el array de productos y crea una tarjeta div por cada uno,
- * mostrando su imagen, nombre y precio dentro del contenedor principal.
+ * Crea una tarjeta div por cada producto de la lista recibida, mostrando
+ * su imagen, nombre y precio dentro del contenedor principal.
  *
  * @method renderizarProductos
+ * @param {Array} lista - Productos a mostrar. Si no se envía, muestra todos.
  * @return {void} No retorna ningún valor; escribe las tarjetas en el DOM.
  */
-renderizarProductos = () => {
+renderizarProductos = (lista) => {
     let contenedor = document.getElementById("contenedorProductos");
     let tarjetas = "";
 
-    for (let i = 0; i < productos.length; i++) {
+    if (lista === undefined) {
+        lista = productos;
+    }
+
+    if (lista.length === 0) {
+        contenedor.innerHTML = "<p>No se encontraron productos.</p>";
+        return;
+    }
+
+    for (let i = 0; i < lista.length; i++) {
+        let indiceReal = productos.indexOf(lista[i]);
+
         tarjetas = tarjetas +
             '<div class="tarjeta">' +
-                '<img src="' + RUTA_IMAGENES + productos[i].imagen + '" alt="' + productos[i].nombre + '">' +
-                '<h3>' + productos[i].nombre + '</h3>' +
-                '<p class="precio">$' + productos[i].precio + '</p>' +
-                '<button class="btn-detalle" onclick="abrirDialog(' + i + ')">Ver detalle de Producto</button>' +
+                '<img src="' + RUTA_IMAGENES + lista[i].imagen + '" alt="' + lista[i].nombre + '">' +
+                '<h3>' + lista[i].nombre + '</h3>' +
+                '<p class="precio">$' + lista[i].precio + '</p>' +
+                '<button class="btn-detalle" onclick="abrirDialog(' + indiceReal + ')">Ver detalle de Producto</button>' +
+                '<button class="btn-agregar" onclick="agregarAlCarrito(' + indiceReal + ')">Agregar al carrito</button>' +
             '</div>';
     }
 
     contenedor.innerHTML = tarjetas;
+}
+
+/**
+ * Lee los valores de los filtros del formulario y muestra únicamente
+ * los productos que cumplen con todas las condiciones.
+ *
+ * @method aplicarFiltros
+ * @return {void} No retorna ningún valor; vuelve a renderizar el catálogo.
+ */
+aplicarFiltros = () => {
+    let palabra = document.getElementById("buscar").value.toLowerCase();
+    let precioMin = Number(document.getElementById("precioMin").value);
+    let precioMax = Number(document.getElementById("precioMax").value);
+    let marca = document.getElementById("marca").value;
+
+    // Se arma un array con las categorías tildadas
+    let checks = document.getElementsByName("chk_categoria");
+    let categorias = [];
+
+    for (let i = 0; i < checks.length; i++) {
+        if (checks[i].checked) {
+            categorias.push(checks[i].value);
+        }
+    }
+
+    let filtrados = productos.filter((prod) => {
+        let cumplePalabra = prod.nombre.toLowerCase().includes(palabra);
+        let cumpleMin = precioMin === 0 || prod.precio >= precioMin;
+        let cumpleMax = precioMax === 0 || prod.precio <= precioMax;
+        let cumpleMarca = marca === "" || prod.marca === marca;
+        let cumpleCategoria = categorias.length === 0 || categorias.includes(prod.categoria);
+
+        return cumplePalabra && cumpleMin && cumpleMax && cumpleMarca && cumpleCategoria;
+    });
+
+    renderizarProductos(filtrados);
 }
 
 /**
@@ -212,6 +261,7 @@ cerrarDialog = () => {
     let miDialog = document.getElementById("dialogDetalle");
     miDialog.close();
 }
+
 /**
  * Devuelve el array de productos guardado en el localStorage.
  * Si todavía no existe, devuelve un array vacío.

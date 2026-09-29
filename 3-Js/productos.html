@@ -26,7 +26,7 @@
             <legend>Búsqueda</legend>
             <p>
                 <label for="buscar">Buscar:</label>
-                <input id="buscar" type="text" name="txt_buscar">
+                <input id="buscar" type="text" name="txt_buscar" oninput="aplicarFiltros()">
             </p>
         </fieldset>
 
@@ -34,26 +34,26 @@
             <legend>Precios</legend>
             <p>
                 <label for="precioMin">Mínimo:</label>
-                <input id="precioMin" type="number" name="num_precio_min">
+                <input id="precioMin" type="number" name="num_precio_min" oninput="aplicarFiltros()">
             </p>
             <p>
                 <label for="precioMax">Máximo:</label>
-                <input id="precioMax" type="number" name="num_precio_max">
+                <input id="precioMax" type="number" name="num_precio_max" oninput="aplicarFiltros()">
             </p>
         </fieldset>
 
         <fieldset>
             <legend>Tipo de Productos</legend>
             <p>
-                <input id="protectores" type="checkbox" name="chk_categoria" value="Protectores">
+                <input id="protectores" type="checkbox" name="chk_categoria" value="Protectores" onchange="aplicarFiltros()">
                 <label for="protectores">Protectores</label>
             </p>
             <p>
-                <input id="entrenamiento" type="checkbox" name="chk_categoria" value="Entrenamiento">
+                <input id="entrenamiento" type="checkbox" name="chk_categoria" value="Entrenamiento" onchange="aplicarFiltros()">
                 <label for="entrenamiento">Entrenamiento</label>
             </p>
             <p>
-                <input id="doboks" type="checkbox" name="chk_categoria" value="Dobok">
+                <input id="doboks" type="checkbox" name="chk_categoria" value="Dobok" onchange="aplicarFiltros()">
                 <label for="doboks">Doboks</label>
             </p>
         </fieldset>
@@ -61,7 +61,7 @@
         <fieldset>
             <legend>Marca</legend>
             <p>
-                <select id="marca" name="sel_marca">
+                <select id="marca" name="sel_marca" onchange="aplicarFiltros()">
                     <option value="">Todas</option>
                     <option value="Gran Marc">Gran Marc</option>
                     <option value="Daedo">Daedo</option>
