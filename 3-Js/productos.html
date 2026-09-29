@@ -6,9 +6,10 @@
     <title>Productos</title>
 
     <link rel="stylesheet" href="estilos.css">
+    <script type="text/javascript" src="tienda.js"></script>
     <script type="text/javascript" src="misFunciones.js"></script>
 </head>
-<body>
+<body onload="renderizarProductos()">
 
 <header>
     <h1>Catálogo de Productos</h1>
@@ -70,44 +71,7 @@
     </form>
 </aside>
 
-<main class="contenedor">
-
-    <div class="tarjeta">
-        <img src="https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/cabezal-cerrado.webp" alt="Cabezal Sparring">
-        <h3>Cabezal Sparring</h3>
-        <button class="btn-detalle" onclick="abrirDialog()">Ver detalle de Producto</button>
-    </div>
-
-    <div class="tarjeta">
-        <img src="https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/dobok.webp" alt="Dobok Dan">
-        <h3>Dobok Dan</h3>
-        <button class="btn-detalle" onclick="abrirDialog()">Ver detalle de Producto</button>
-    </div>
-
-    <div class="tarjeta">
-        <img src="https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/escudo-potencia.webp" alt="Escudo de Potencia">
-        <h3>Escudo de Potencia</h3>
-        <button class="btn-detalle" onclick="abrirDialog()">Ver detalle de Producto</button>
-    </div>
-
-    <div class="tarjeta">
-        <img src="https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/foco-con-dedos.webp" alt="Par de focos redondos">
-        <h3>Par de focos redondos</h3>
-        <button class="btn-detalle" onclick="abrirDialog()">Ver detalle de Producto</button>
-    </div>
-
-    <div class="tarjeta">
-        <img src="https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/protectores-manos.webp" alt="Guantes 10 onzas">
-        <h3>Guantes 10 onzas</h3>
-        <button class="btn-detalle" onclick="abrirDialog()">Ver detalle de Producto</button>
-    </div>
-
-    <div class="tarjeta">
-        <img src="https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/protectores-manos.webp" alt="Protectores Pie">
-        <h3>Protectores Pie</h3>
-        <button class="btn-detalle" onclick="abrirDialog()">Ver detalle de Producto</button>
-    </div>
-
+<main class="contenedor" id="contenedorProductos">
 </main>
 
 <dialog id="dialogDetalle">

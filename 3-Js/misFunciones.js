@@ -170,3 +170,31 @@ dividir = () => {
 
     document.getElementById("totalD").innerHTML = total;
 }
+/**
+ * URL base donde se encuentran las imágenes de los productos.
+ */
+const RUTA_IMAGENES = "https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/";
+
+/**
+ * Recorre el array de productos y crea una tarjeta div por cada uno,
+ * mostrando su imagen, nombre y precio dentro del contenedor principal.
+ *
+ * @method renderizarProductos
+ * @return {void} No retorna ningún valor; escribe las tarjetas en el DOM.
+ */
+renderizarProductos = () => {
+    let contenedor = document.getElementById("contenedorProductos");
+    let tarjetas = "";
+
+    for (let i = 0; i < productos.length; i++) {
+        tarjetas = tarjetas +
+            '<div class="tarjeta">' +
+                '<img src="' + RUTA_IMAGENES + productos[i].imagen + '" alt="' + productos[i].nombre + '">' +
+                '<h3>' + productos[i].nombre + '</h3>' +
+                '<p class="precio">$' + productos[i].precio + '</p>' +
+                '<button class="btn-detalle" onclick="abrirDialog()">Ver detalle de Producto</button>' +
+            '</div>';
+    }
+
+    contenedor.innerHTML = tarjetas;
+}
