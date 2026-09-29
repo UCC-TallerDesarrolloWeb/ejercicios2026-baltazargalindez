@@ -53,6 +53,21 @@ nav {
     padding: 15px 30px;
 }
 
+/* Contador de productos del carrito */
+.contador {
+    display: inline-block;
+    background-color: var(--color-carrito);
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
 /* Panel de filtros */
 .filtros {
     max-width: 280px;
@@ -149,34 +164,7 @@ nav {
     background-color: #28b463;
 }
 
-/* Dialog */
-dialog {
-    border: 2px solid var(--color-principal);
-    border-radius: 10px;
-    padding: 25px;
-}
-
-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-#contenidoDialog {
-    max-width: 400px;
-    text-align: center;
-}
-
-#contenidoDialog img {
-    width: 200px;
-}
-
-/* Pie de página */
-footer {
-    text-align: center;
-    margin-top: 40px;
-    padding: 15px;
-    color: var(--color-principal);
-    font-size: 14px;
-}
+/* Acciones del carrito */
 .acciones {
     text-align: center;
     margin-bottom: 25px;
@@ -209,4 +197,33 @@ footer {
 
 .btn-eliminar:hover {
     background-color: #c0392b;
+}
+
+/* Dialog */
+dialog {
+    border: 2px solid var(--color-principal);
+    border-radius: 10px;
+    padding: 25px;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#contenidoDialog {
+    max-width: 400px;
+    text-align: center;
+}
+
+#contenidoDialog img {
+    width: 200px;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px;
+    color: var(--color-principal);
+    font-size: 14px;
 }

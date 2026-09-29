@@ -9,7 +9,7 @@
     <script type="text/javascript" src="tienda.js"></script>
     <script type="text/javascript" src="misFunciones.js"></script>
 </head>
-<body onload="renderizarProductos()">
+<body onload="renderizarProductos(); actualizarContador()">
 
 <header>
     <h1>Catálogo de Productos</h1>
@@ -18,6 +18,7 @@
 <nav>
     <button class="btn btn-catalogo" onclick="location.href='productos.html'">Catálogo</button>
     <button class="btn btn-carrito" onclick="location.href='carrito.html'">Carrito de Compras</button>
+    <span class="contador" id="contadorCarrito">0</span>
 </nav>
 
 <aside class="filtros">

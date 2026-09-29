@@ -155,6 +155,23 @@ dividir = () => {
 const RUTA_IMAGENES = "https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/";
 
 /**
+ * Formatea un número como precio en pesos argentinos: $3.123,45
+ *
+ * @method formatearPrecio
+ * @param {number} precio - Valor numérico a formatear.
+ * @return {string} El precio formateado con separador de miles y decimales.
+ */
+formatearPrecio = (precio) => {
+    let formato = new Intl.NumberFormat("es-AR", {
+        style: "currency",
+        currency: "ARS",
+        minimumFractionDigits: 2
+    });
+
+    return formato.format(precio);
+}
+
+/**
  * Crea una tarjeta div por cada producto de la lista recibida, mostrando
  * su imagen, nombre y precio dentro del contenedor principal.
  *
@@ -182,7 +199,7 @@ renderizarProductos = (lista) => {
             '<div class="tarjeta">' +
                 '<img src="' + RUTA_IMAGENES + lista[i].imagen + '" alt="' + lista[i].nombre + '">' +
                 '<h3>' + lista[i].nombre + '</h3>' +
-                '<p class="precio">$' + lista[i].precio + '</p>' +
+                '<p class="precio">' + formatearPrecio(lista[i].precio) + '</p>' +
                 '<button class="btn-detalle" onclick="abrirDialog(' + indiceReal + ')">Ver detalle de Producto</button>' +
                 '<button class="btn-agregar" onclick="agregarAlCarrito(' + indiceReal + ')">Agregar al carrito</button>' +
             '</div>';
@@ -246,7 +263,7 @@ abrirDialog = (indice) => {
         '<p><strong>Categoría:</strong> ' + prod.categoria + '</p>' +
         '<p><strong>Marca:</strong> ' + prod.marca + '</p>' +
         '<p><strong>Talles:</strong> ' + prod.talle + '</p>' +
-        '<p class="precio">$' + prod.precio + '</p>';
+        '<p class="precio">' + formatearPrecio(prod.precio) + '</p>';
 
     miDialog.showModal();
 }
@@ -280,6 +297,19 @@ obtenerCarrito = () => {
 }
 
 /**
+ * Actualiza el contador que muestra cuántos productos hay en el carrito.
+ *
+ * @method actualizarContador
+ * @return {void} No retorna ningún valor; escribe la cantidad en el DOM.
+ */
+actualizarContador = () => {
+    let contador = document.getElementById("contadorCarrito");
+    let carrito = obtenerCarrito();
+
+    contador.innerHTML = carrito.length;
+}
+
+/**
  * Agrega el producto seleccionado al carrito y lo guarda en el localStorage.
  *
  * @method agregarAlCarrito
@@ -291,6 +321,7 @@ agregarAlCarrito = (indice) => {
 
     carrito.push(productos[indice]);
     localStorage.setItem("carrito", JSON.stringify(carrito));
+    actualizarContador();
 
     alert(productos[indice].nombre + " se agregó al carrito");
 }
@@ -317,7 +348,7 @@ renderizarCarrito = () => {
             '<div class="tarjeta">' +
                 '<img src="' + RUTA_IMAGENES + carrito[i].imagen + '" alt="' + carrito[i].nombre + '">' +
                 '<h3>' + carrito[i].nombre + '</h3>' +
-                '<p class="precio">$' + carrito[i].precio + '</p>' +
+                '<p class="precio">' + formatearPrecio(carrito[i].precio) + '</p>' +
                 '<button class="btn-eliminar" onclick="eliminarProducto(' + i + ')">Eliminar el producto</button>' +
             '</div>';
     }
@@ -340,6 +371,7 @@ eliminarProducto = (indice) => {
     localStorage.setItem("carrito", JSON.stringify(carrito));
 
     renderizarCarrito();
+    actualizarContador();
 }
 
 /**
@@ -350,5 +382,7 @@ eliminarProducto = (indice) => {
  */
 vaciarCarrito = () => {
     localStorage.removeItem("carrito");
+
     renderizarCarrito();
+    actualizarContador();
 }
