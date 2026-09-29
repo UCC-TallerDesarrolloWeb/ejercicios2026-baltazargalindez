@@ -247,7 +247,7 @@ agregarAlCarrito = (indice) => {
 
 /**
  * Recorre el carrito guardado en el localStorage y crea una tarjeta
- * por cada producto dentro del contenedor de la página carrito.html.
+ * por cada producto, con un botón para eliminarlo.
  *
  * @method renderizarCarrito
  * @return {void} No retorna ningún valor; escribe las tarjetas en el DOM.
@@ -268,8 +268,37 @@ renderizarCarrito = () => {
                 '<img src="' + RUTA_IMAGENES + carrito[i].imagen + '" alt="' + carrito[i].nombre + '">' +
                 '<h3>' + carrito[i].nombre + '</h3>' +
                 '<p class="precio">$' + carrito[i].precio + '</p>' +
+                '<button class="btn-eliminar" onclick="eliminarProducto(' + i + ')">Eliminar el producto</button>' +
             '</div>';
     }
 
     contenedor.innerHTML = tarjetas;
+}
+
+/**
+ * Elimina del carrito el producto que ocupa la posición indicada y
+ * actualiza el localStorage y la vista.
+ *
+ * @method eliminarProducto
+ * @param {number} indice - Posición del producto dentro del array carrito.
+ * @return {void} No retorna ningún valor; actualiza el localStorage y el DOM.
+ */
+eliminarProducto = (indice) => {
+    let carrito = obtenerCarrito();
+
+    carrito.splice(indice, 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    renderizarCarrito();
+}
+
+/**
+ * Vacía por completo el carrito, borrando la clave del localStorage.
+ *
+ * @method vaciarCarrito
+ * @return {void} No retorna ningún valor; actualiza el localStorage y el DOM.
+ */
+vaciarCarrito = () => {
+    localStorage.removeItem("carrito");
+    renderizarCarrito();
 }
