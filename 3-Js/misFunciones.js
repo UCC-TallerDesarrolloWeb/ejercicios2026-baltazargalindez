@@ -209,8 +209,31 @@ renderizarProductos = (lista) => {
 }
 
 /**
- * Lee los valores de los filtros del formulario y muestra únicamente
- * los productos que cumplen con todas las condiciones.
+ * Ordena una lista de productos según el criterio seleccionado por el usuario.
+ *
+ * @method ordenarCatalogo
+ * @param {Array} lista - Productos a ordenar.
+ * @param {string} criterio - "precioAsc", "precioDesc", "nombreAsc" o "nombreDesc".
+ * @return {Array} La misma lista, ya ordenada.
+ */
+ordenarCatalogo = (lista, criterio) => {
+    if (criterio === "precioAsc") {
+        lista.sort((a, b) => a.precio - b.precio);
+    } else if (criterio === "precioDesc") {
+        lista.sort((a, b) => b.precio - a.precio);
+    } else if (criterio === "nombreAsc") {
+        lista.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    } else if (criterio === "nombreDesc") {
+        lista.sort((a, b) => b.nombre.localeCompare(a.nombre));
+    }
+
+    return lista;
+}
+
+/**
+ * Lee los valores de los filtros del formulario, muestra únicamente los
+ * productos que cumplen con todas las condiciones y los ordena según
+ * el criterio elegido.
  *
  * @method aplicarFiltros
  * @return {void} No retorna ningún valor; vuelve a renderizar el catálogo.
@@ -220,6 +243,7 @@ aplicarFiltros = () => {
     let precioMin = Number(document.getElementById("precioMin").value);
     let precioMax = Number(document.getElementById("precioMax").value);
     let marca = document.getElementById("marca").value;
+    let criterio = document.getElementById("orden").value;
 
     // Se arma un array con las categorías tildadas
     let checks = document.getElementsByName("chk_categoria");
@@ -241,7 +265,9 @@ aplicarFiltros = () => {
         return cumplePalabra && cumpleMin && cumpleMax && cumpleMarca && cumpleCategoria;
     });
 
-    renderizarProductos(filtrados);
+    let ordenados = ordenarCatalogo(filtrados, criterio);
+
+    renderizarProductos(ordenados);
 }
 
 /**

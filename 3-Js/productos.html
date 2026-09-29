@@ -69,6 +69,19 @@
                 </select>
             </p>
         </fieldset>
+
+        <fieldset>
+            <legend>Ordenar por</legend>
+            <p>
+                <select id="orden" name="sel_orden" onchange="aplicarFiltros()">
+                    <option value="">Sin ordenar</option>
+                    <option value="precioAsc">Precio: menor a mayor</option>
+                    <option value="precioDesc">Precio: mayor a menor</option>
+                    <option value="nombreAsc">Nombre: A-Z</option>
+                    <option value="nombreDesc">Nombre: Z-A</option>
+                </select>
+            </p>
+        </fieldset>
     </form>
 </aside>
 
