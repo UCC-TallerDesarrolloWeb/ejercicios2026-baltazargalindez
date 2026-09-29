@@ -11,7 +11,6 @@
 convertirUnidades = (id, valor) => {
     let met, pul, pie, yar;
 
-    // Se reemplaza la coma decimal por punto para evitar errores
     if (valor.includes(",")) {
         valor = valor.replace(",", ".");
     }
@@ -115,58 +114,59 @@ cerrarDialog = () => {
     let miDialog = document.getElementById("dialogDetalle");
     miDialog.close();
 }
+
 /**
  * Suma los dos valores ingresados y muestra el resultado.
  *
  * @method sumar
- * @return {void} No retorna ningún valor; asigna el total al input correspondiente.
+ * @return {void} No retorna ningún valor; asigna el total al span correspondiente.
  */
 sumar = () => {
     let num1 = Number(document.getElementById("nums1").value);
     let num2 = Number(document.getElementById("nums2").value);
     let total = num1 + num2;
 
-    document.getElementById("totalS").value = total;
+    document.getElementById("totalS").innerHTML = total;
 }
 
 /**
  * Resta los dos valores ingresados y muestra el resultado.
  *
  * @method restar
- * @return {void} No retorna ningún valor; asigna el total al input correspondiente.
+ * @return {void} No retorna ningún valor; asigna el total al span correspondiente.
  */
 restar = () => {
     let num1 = Number(document.getElementById("numr1").value);
     let num2 = Number(document.getElementById("numr2").value);
     let total = num1 - num2;
 
-    document.getElementById("totalR").value = total;
+    document.getElementById("totalR").innerHTML = total;
 }
 
 /**
  * Multiplica los dos valores ingresados y muestra el resultado.
  *
  * @method multiplicar
- * @return {void} No retorna ningún valor; asigna el total al input correspondiente.
+ * @return {void} No retorna ningún valor; asigna el total al span correspondiente.
  */
 multiplicar = () => {
     let num1 = Number(document.getElementById("numm1").value);
     let num2 = Number(document.getElementById("numm2").value);
     let total = num1 * num2;
 
-    document.getElementById("totalM").value = total;
+    document.getElementById("totalM").innerHTML = total;
 }
 
 /**
  * Divide los dos valores ingresados y muestra el resultado.
  *
  * @method dividir
- * @return {void} No retorna ningún valor; asigna el total al input correspondiente.
+ * @return {void} No retorna ningún valor; asigna el total al span correspondiente.
  */
 dividir = () => {
     let num1 = Number(document.getElementById("numd1").value);
     let num2 = Number(document.getElementById("numd2").value);
     let total = num1 / num2;
 
-    document.getElementById("totalD").value = total;
+    document.getElementById("totalD").innerHTML = total;
 }
