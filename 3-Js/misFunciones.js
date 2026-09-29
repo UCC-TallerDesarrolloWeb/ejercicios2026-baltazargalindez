@@ -115,3 +115,58 @@ cerrarDialog = () => {
     let miDialog = document.getElementById("dialogDetalle");
     miDialog.close();
 }
+/**
+ * Suma los dos valores ingresados y muestra el resultado.
+ *
+ * @method sumar
+ * @return {void} No retorna ningún valor; asigna el total al input correspondiente.
+ */
+sumar = () => {
+    let num1 = Number(document.getElementById("nums1").value);
+    let num2 = Number(document.getElementById("nums2").value);
+    let total = num1 + num2;
+
+    document.getElementById("totalS").value = total;
+}
+
+/**
+ * Resta los dos valores ingresados y muestra el resultado.
+ *
+ * @method restar
+ * @return {void} No retorna ningún valor; asigna el total al input correspondiente.
+ */
+restar = () => {
+    let num1 = Number(document.getElementById("numr1").value);
+    let num2 = Number(document.getElementById("numr2").value);
+    let total = num1 - num2;
+
+    document.getElementById("totalR").value = total;
+}
+
+/**
+ * Multiplica los dos valores ingresados y muestra el resultado.
+ *
+ * @method multiplicar
+ * @return {void} No retorna ningún valor; asigna el total al input correspondiente.
+ */
+multiplicar = () => {
+    let num1 = Number(document.getElementById("numm1").value);
+    let num2 = Number(document.getElementById("numm2").value);
+    let total = num1 * num2;
+
+    document.getElementById("totalM").value = total;
+}
+
+/**
+ * Divide los dos valores ingresados y muestra el resultado.
+ *
+ * @method dividir
+ * @return {void} No retorna ningún valor; asigna el total al input correspondiente.
+ */
+dividir = () => {
+    let num1 = Number(document.getElementById("numd1").value);
+    let num2 = Number(document.getElementById("numd2").value);
+    let total = num1 / num2;
+
+    document.getElementById("totalD").value = total;
+}
