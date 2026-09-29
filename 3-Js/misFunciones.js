@@ -1,6 +1,7 @@
 /**
  * Convierte el valor ingresado en uno de los campos a las demás unidades
- * de longitud (metro, pulgada, pie y yarda) y actualiza los inputs.
+ * de longitud (metro, pulgada, pie y yarda) y actualiza los inputs
+ * mostrando el resultado con 2 decimales.
  *
  * @method convertirUnidades
  * @param {string} id - Id del campo modificado: "metro", "pulgada", "pie" o "yarda".
@@ -8,9 +9,9 @@
  * @return {void} No retorna ningún valor; asigna los resultados a los inputs.
  */
 convertirUnidades = (id, valor) => {
-    
     let met, pul, pie, yar;
 
+    // Se reemplaza la coma decimal por punto para evitar errores
     if (valor.includes(",")) {
         valor = valor.replace(",", ".");
     }
@@ -22,28 +23,27 @@ convertirUnidades = (id, valor) => {
         pie = "";
         yar = "";
     } else if (id === "metro") {
-        met = valor;
-        pul = valor * 39.3701;
-        pie = valor * 3.28084;
-        yar = valor * 1.09361;
+        met = Number(valor).toFixed(2);
+        pul = (valor * 39.3701).toFixed(2);
+        pie = (valor * 3.28084).toFixed(2);
+        yar = (valor * 1.09361).toFixed(2);
     } else if (id === "pulgada") {
-        met = valor / 39.3701;
-        pul = valor;
-        pie = valor / 12;
-        yar = valor / 36;
+        met = (valor / 39.3701).toFixed(2);
+        pul = Number(valor).toFixed(2);
+        pie = (valor / 12).toFixed(2);
+        yar = (valor / 36).toFixed(2);
     } else if (id === "pie") {
-        met = valor / 3.28084;
-        pul = valor * 12;
-        pie = valor;
-        yar = valor / 3;
+        met = (valor / 3.28084).toFixed(2);
+        pul = (valor * 12).toFixed(2);
+        pie = Number(valor).toFixed(2);
+        yar = (valor / 3).toFixed(2);
     } else if (id === "yarda") {
-        met = valor / 1.09361;
-        pul = valor * 36;
-        pie = valor * 3;
-        yar = valor;
+        met = (valor / 1.09361).toFixed(2);
+        pul = (valor * 36).toFixed(2);
+        pie = (valor * 3).toFixed(2);
+        yar = Number(valor).toFixed(2);
     }
 
-    
     document.getElementById("metro").value = met;
     document.getElementById("pulgada").value = pul;
     document.getElementById("pie").value = pie;
