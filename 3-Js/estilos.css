@@ -199,6 +199,14 @@ nav {
     background-color: #c0392b;
 }
 
+/* Total a pagar */
+.total {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--color-principal);
+    margin-top: 15px;
+}
+
 /* Dialog */
 dialog {
     border: 2px solid var(--color-principal);

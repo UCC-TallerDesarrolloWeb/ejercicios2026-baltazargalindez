@@ -327,47 +327,112 @@ agregarAlCarrito = (indice) => {
 }
 
 /**
- * Recorre el carrito guardado en el localStorage y crea una tarjeta
- * por cada producto, con un botón para eliminarlo.
+ * Agrupa los productos repetidos del carrito, contando cuántas veces
+ * aparece cada uno.
+ *
+ * @method agruparCarrito
+ * @param {Array} carrito - Array de productos tal como se guarda en el localStorage.
+ * @return {Array} Array de objetos con la forma { producto, cantidad }.
+ */
+agruparCarrito = (carrito) => {
+    let agrupados = [];
+
+    for (let i = 0; i < carrito.length; i++) {
+        let encontrado = false;
+
+        for (let j = 0; j < agrupados.length; j++) {
+            if (agrupados[j].producto.nombre === carrito[i].nombre) {
+                agrupados[j].cantidad = agrupados[j].cantidad + 1;
+                encontrado = true;
+            }
+        }
+
+        if (encontrado === false) {
+            agrupados.push({ producto: carrito[i], cantidad: 1 });
+        }
+    }
+
+    return agrupados;
+}
+
+/**
+ * Calcula el total a pagar sumando el precio de todos los productos
+ * que hay en el carrito.
+ *
+ * @method calcularTotal
+ * @param {Array} carrito - Array de productos del carrito.
+ * @return {number} Suma de todos los precios.
+ */
+calcularTotal = (carrito) => {
+    let total = 0;
+
+    for (let i = 0; i < carrito.length; i++) {
+        total = total + carrito[i].precio;
+    }
+
+    return total;
+}
+
+/**
+ * Recorre el carrito guardado en el localStorage, agrupa los productos
+ * repetidos y crea una tarjeta por cada uno con su cantidad, subtotal
+ * y un botón para eliminarlo. También muestra el total a pagar.
  *
  * @method renderizarCarrito
  * @return {void} No retorna ningún valor; escribe las tarjetas en el DOM.
  */
 renderizarCarrito = () => {
     let contenedor = document.getElementById("contenedorCarrito");
+    let totalDiv = document.getElementById("totalCarrito");
     let carrito = obtenerCarrito();
     let tarjetas = "";
 
     if (carrito.length === 0) {
         contenedor.innerHTML = "<p>El carrito está vacío.</p>";
+        totalDiv.innerHTML = "";
         return;
     }
 
-    for (let i = 0; i < carrito.length; i++) {
+    let agrupados = agruparCarrito(carrito);
+
+    for (let i = 0; i < agrupados.length; i++) {
+        let prod = agrupados[i].producto;
+        let cant = agrupados[i].cantidad;
+        let subtotal = prod.precio * cant;
+
         tarjetas = tarjetas +
             '<div class="tarjeta">' +
-                '<img src="' + RUTA_IMAGENES + carrito[i].imagen + '" alt="' + carrito[i].nombre + '">' +
-                '<h3>' + carrito[i].nombre + '</h3>' +
-                '<p class="precio">' + formatearPrecio(carrito[i].precio) + '</p>' +
-                '<button class="btn-eliminar" onclick="eliminarProducto(' + i + ')">Eliminar el producto</button>' +
+                '<img src="' + RUTA_IMAGENES + prod.imagen + '" alt="' + prod.nombre + '">' +
+                '<h3>' + prod.nombre + '</h3>' +
+                '<p>Precio unitario: ' + formatearPrecio(prod.precio) + '</p>' +
+                '<p><strong>Cantidad:</strong> ' + cant + '</p>' +
+                '<p class="precio">Subtotal: ' + formatearPrecio(subtotal) + '</p>' +
+                '<button class="btn-eliminar" onclick="eliminarProducto(\'' + prod.nombre + '\')">Eliminar el producto</button>' +
             '</div>';
     }
 
     contenedor.innerHTML = tarjetas;
+    totalDiv.innerHTML = "Total a pagar: " + formatearPrecio(calcularTotal(carrito));
 }
 
 /**
- * Elimina del carrito el producto que ocupa la posición indicada y
+ * Elimina del carrito todas las unidades del producto indicado y
  * actualiza el localStorage y la vista.
  *
  * @method eliminarProducto
- * @param {number} indice - Posición del producto dentro del array carrito.
+ * @param {string} nombre - Nombre del producto a eliminar.
  * @return {void} No retorna ningún valor; actualiza el localStorage y el DOM.
  */
-eliminarProducto = (indice) => {
+eliminarProducto = (nombre) => {
     let carrito = obtenerCarrito();
 
-    carrito.splice(indice, 1);
+    // Se recorre de atrás hacia adelante para que splice no altere los índices
+    for (let i = carrito.length - 1; i >= 0; i--) {
+        if (carrito[i].nombre === nombre) {
+            carrito.splice(i, 1);
+        }
+    }
+
     localStorage.setItem("carrito", JSON.stringify(carrito));
 
     renderizarCarrito();
