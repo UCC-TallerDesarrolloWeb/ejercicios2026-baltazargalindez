@@ -94,28 +94,6 @@ mostrarOcultar = (valor) => {
 }
 
 /**
- * Abre el dialog con el detalle del producto.
- *
- * @method abrirDialog
- * @return {void} No retorna ningún valor; muestra el dialog en pantalla.
- */
-abrirDialog = () => {
-    let miDialog = document.getElementById("dialogDetalle");
-    miDialog.showModal();
-}
-
-/**
- * Cierra el dialog con el detalle del producto.
- *
- * @method cerrarDialog
- * @return {void} No retorna ningún valor; oculta el dialog.
- */
-cerrarDialog = () => {
-    let miDialog = document.getElementById("dialogDetalle");
-    miDialog.close();
-}
-
-/**
  * Suma los dos valores ingresados y muestra el resultado.
  *
  * @method sumar
@@ -170,6 +148,7 @@ dividir = () => {
 
     document.getElementById("totalD").innerHTML = total;
 }
+
 /**
  * URL base donde se encuentran las imágenes de los productos.
  */
@@ -192,9 +171,44 @@ renderizarProductos = () => {
                 '<img src="' + RUTA_IMAGENES + productos[i].imagen + '" alt="' + productos[i].nombre + '">' +
                 '<h3>' + productos[i].nombre + '</h3>' +
                 '<p class="precio">$' + productos[i].precio + '</p>' +
-                '<button class="btn-detalle" onclick="abrirDialog()">Ver detalle de Producto</button>' +
+                '<button class="btn-detalle" onclick="abrirDialog(' + i + ')">Ver detalle de Producto</button>' +
             '</div>';
     }
 
     contenedor.innerHTML = tarjetas;
+}
+
+/**
+ * Abre el dialog mostrando la información del producto seleccionado.
+ *
+ * @method abrirDialog
+ * @param {number} indice - Posición del producto dentro del array productos.
+ * @return {void} No retorna ningún valor; completa y muestra el dialog.
+ */
+abrirDialog = (indice) => {
+    let miDialog = document.getElementById("dialogDetalle");
+    let contenido = document.getElementById("contenidoDialog");
+    let prod = productos[indice];
+
+    contenido.innerHTML =
+        '<h2>' + prod.nombre + '</h2>' +
+        '<img src="' + RUTA_IMAGENES + prod.imagen + '" alt="' + prod.nombre + '">' +
+        '<p>' + prod.description + '</p>' +
+        '<p><strong>Categoría:</strong> ' + prod.categoria + '</p>' +
+        '<p><strong>Marca:</strong> ' + prod.marca + '</p>' +
+        '<p><strong>Talles:</strong> ' + prod.talle + '</p>' +
+        '<p class="precio">$' + prod.precio + '</p>';
+
+    miDialog.showModal();
+}
+
+/**
+ * Cierra el dialog con el detalle del producto.
+ *
+ * @method cerrarDialog
+ * @return {void} No retorna ningún valor; oculta el dialog.
+ */
+cerrarDialog = () => {
+    let miDialog = document.getElementById("dialogDetalle");
+    miDialog.close();
 }

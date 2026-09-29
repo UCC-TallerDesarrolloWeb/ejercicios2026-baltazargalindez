@@ -112,6 +112,12 @@ nav {
     margin-bottom: 0;
 }
 
+.precio {
+    font-size: 18px;
+    font-weight: bold;
+    color: #196f3d;
+}
+
 /* Botón de detalle y dialog */
 .btn-detalle {
     background-color: var(--color-principal);
@@ -136,4 +142,13 @@ dialog {
 
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+#contenidoDialog {
+    max-width: 400px;
+    text-align: center;
+}
+
+#contenidoDialog img {
+    width: 200px;
 }
