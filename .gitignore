@@ -1,3 +1,5 @@
 node-module
 *.pdf
 node_modules/
+
+out/
